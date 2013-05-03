@@ -100,12 +100,17 @@ function attachControls(){
 }
 
 var formatters = {
-	percent: function(v){
-		return (v).toFixed(0) + "%";
+	bar: function(el, variable){
+		this.percent(el, variable);
+		el.style.width = variable.value+"px";
 	},
 
-	dollars: function(v){
-		return "$" + (v.toFixed(2));
+	percent: function(el, variable){
+		el.innerHTML = (variable.value).toFixed(0) + "%";
+	},
+
+	dollars: function(el, variable){
+		el.innerHTML = "$" + (variable.value.toFixed(2));
 	}
 };
 
@@ -114,7 +119,8 @@ var id = function(a){ return a; };
 function render(){
 	_.each(viewForVar, function(el, varName){
 		var variable = vars[varName];
-		el.innerHTML = (formatters[el.dataset.format]||id)(variable.value);
+		formatters[el.dataset.format](el, variable);
+		console.log("Rendering", variable, el)
 	});
 }
 
