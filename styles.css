@@ -2,6 +2,10 @@ body {
 	background-color: #f8f8f8;
 	font: 16px/1.5 helvetica;
 	margin: 20px 40px;
+
+ 	-moz-user-select: none;
+ 	-webkit-user-select: none;
+ 	-ms-user-select: none;
 }
 
 dt { 
@@ -16,6 +20,7 @@ dd {
 	text-align: right;
 }
 
+dl dl { display: block; clear: both;}
 
 
 [data-variable] {
@@ -24,9 +29,6 @@ dd {
 	margin: 20px;
 	padding: 3px;
 	cursor: col-resize;
- 	-moz-user-select: none;
- 	-webkit-user-select: none;
- 	-ms-user-select: none;
 }
 
 .locked[data-variable] {

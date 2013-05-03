@@ -8,13 +8,24 @@
 	<h1>Simple budget</h1>
 	<dl id="budget">
 		<dt>Revenue</dt>
-		<dd><span data-variable="revenue"></span></dd>
+		<dd><span data-variable="revenue" data-format="dollars"></span></dd>
+
+		<dl id="taxes">
+			<dt>Tax Brackets</dt>
+			<span data-variable="tax-bracket-0" data-format="percent"></span>
+			<span data-variable="tax-bracket-1" data-format="percent"></span>
+			<span data-variable="tax-bracket-2" data-format="percent"></span>
+			<span data-variable="tax-bracket-3" data-format="percent"></span>
+			<span data-variable="tax-bracket-4" data-format="percent"></span>
+			<span data-variable="tax-bracket-5" data-format="percent"></span>
+			<span data-variable="tax-bracket-6" data-format="percent"></span>
+		</dl>
 
 		<dt>Outlays</dt>
-		<dd><span data-variable="outlays"></span></dd>
+		<dd><span data-variable="outlays" data-format="dollars"></span></dd>
 
 		<dt>Balance</dt>
-		<dd><span data-variable="balance"></span></dd>
+		<dd><span data-variable="balance" data-format="dollars"></span></dd>
 	</dl>
 	<script src="lib/c.js"></script>
 	<script src="lib/underscore.js"></script>
