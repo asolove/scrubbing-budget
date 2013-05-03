@@ -9,18 +9,14 @@ body {
 }
 
 dt { 
-	float: left;
-	width: 100px;
+	margin-bottom: 20px;
 	font-weight: bold;
 }
 
-dd { 
-	margin-bottom: 20px;
-	width: 100px;
-	text-align: right;
+dl dl dt { 
+	margin-bottom: 0px;
+	font-weight: normal;
 }
-
-dl dl { display: block; clear: both;}
 
 
 [data-variable] {
@@ -29,6 +25,7 @@ dl dl { display: block; clear: both;}
 	margin: 20px;
 	padding: 3px;
 	cursor: col-resize;
+	font-weight: normal;
 }
 
 .locked[data-variable] {
