@@ -93,6 +93,7 @@ function attachControls(){
 	});
 
 	budget.addEventListener("mouseup", function(e){
+		if(!moving) return;
 		moving = null;
 		s.endEdit();
 	});
