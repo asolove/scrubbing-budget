@@ -3,6 +3,7 @@
 <head>
 <title>The US Federal Budget</title>
 <link href="styles.css" rel="stylesheet"></link>
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css'>
 </head>
 <body>
 	<div class="wrap">
@@ -20,6 +21,12 @@
 	</div>
 
 	<div class="zoomed">
+		<div class="in">
+			<span class="revenues" data-scale="zoomed" data-variable="revenues" data-format="bar"></span></span><span class="deficit" data-scale="zoomed" data-variable="deficit" data-format="bar"></span>
+		</div>
+		<div class="out">
+			<span class="spending" data-scale="zoomed" data-variable="spending" data-format="bar"></span><span class="surplus" data-scale="zoomed" data-variable="surplus" data-format="bar"></span>
+		</div>
 	</div>
 
 	<script src="lib/c.js"></script>

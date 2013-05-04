@@ -54,13 +54,16 @@ s.resolve();
 
 
 var views = document.querySelectorAll("[data-variable]");
-var viewForVar = {};
+var viewsForVar = {};
 _.forEach(views, function(el){
-	viewForVar[el.dataset.variable] = el;
+	viewsForVar[el.dataset.variable] ? 
+		viewsForVar[el.dataset.variable].push(el) : 
+		viewsForVar[el.dataset.variable] = [el];
 });
 
 var scales = {
-	overview: .1
+	overview: .1,
+	zoomed: 4
 };
 
 function scale(el, val){
@@ -73,6 +76,7 @@ function unscale(el, val){
 
 function attachControls(){
 	var moving;
+	var movingView;
 	var startX;
 	var startVal; 
 
@@ -81,6 +85,7 @@ function attachControls(){
 		var variable = vars[varName];
 		if(!variable) return;
 		moving = variable;
+		movingView = e.target;
 		startX = e.screenX;
 		startVal = variable.value;
 		if(variable.strongStay) s.removeConstraint(variable.strongStay);
@@ -103,7 +108,7 @@ function attachControls(){
 
 	document.body.addEventListener("mousemove", function(e){
 		if(!moving) return;
-		var newValue = startVal + unscale(viewForVar[moving.name], e.screenX - startX);
+		var newValue = startVal + unscale(movingView, e.screenX - startX);
 		s.suggestValue(moving, newValue).resolve();
 	});
 
@@ -134,9 +139,11 @@ var formatters = {
 var id = function(a){ return a; };
 
 function render(){
-	_.each(viewForVar, function(el, varName){
+	_.each(viewsForVar, function(els, varName){
 		var variable = vars[varName];
-		formatters[el.dataset.format](el, variable);
+		_.each(els, function(el){
+			formatters[el.dataset.format](el, variable);
+		});
 	});
 }
 

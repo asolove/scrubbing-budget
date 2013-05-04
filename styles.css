@@ -1,40 +1,75 @@
 body {
-	background-color: #444;
-	font: 16px/1.5 helvetica;
-	color: #ccc;
-	margin: 20px 40px;
+	background-color: #dcdcca;
+	font: 16px/1.5 'Source Sans Pro', sans-serif;
+	color: #444;
+	padding: 0; margin: 0;
 
  	-moz-user-select: none;
  	-webkit-user-select: none;
  	-ms-user-select: none;
 }
 
-.wrap {
-	width: 800px;
-	margin: 0px auto;
+header {
+	margin-left: 50px;
+	display: inline-block;
+	text-transform: uppercase;
+	font-size: 1.2em;
+	background-color: #e53b51;
+	color: #fff;
+	padding: 5px 20px;
 }
 
-.overview div {
+header h1 { 
+	font-size: 1em;
+	font-weight: 200;
+}
+
+.overview {
+	margin-top: 1px;
+	padding: 20px 50px;
+	background-color: white;
+}
+
+.zoomed {
+	padding-top: 20px;
+	margin-top: 20px;
+	background-color: white;
+}
+
+.overview div,
+.zoomed div {
 	line-height: 18px;
 }
 
-.overview div span {
+.overview div span,
+.zoomed div span {
 	display: inline-block;
 	height: 14px;
+	border-radius: 1px;
+}
+
+.zoomed div {
+	line-height: 35px;
+}
+
+
+.zoomed div span {
+	height: 60px;
+	border-radius: 2px;
 }
 
 .revenues { 
-	background-color: #059;
+	background-color: #3cb5b5;
 	width: 230px;
 }
 
 .spending {
-	background-color: #7c7;
+	background-color: #9f7055;
 	width: 360px;
 }
 
 .deficit {
-	background-color: #ff8;
+	background-color: #e53b51;
 	width: 129px;
 }
 
