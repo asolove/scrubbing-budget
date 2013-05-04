@@ -1,6 +1,7 @@
 body {
-	background-color: #f8f8f8;
+	background-color: #444;
 	font: 16px/1.5 helvetica;
+	color: #ccc;
 	margin: 20px 40px;
 
  	-moz-user-select: none;
@@ -8,45 +9,36 @@ body {
  	-ms-user-select: none;
 }
 
-dt { 
-	margin-bottom: 20px;
-	font-weight: bold;
+.wrap {
+	width: 800px;
+	margin: 0px auto;
 }
 
-dl {
-	overflow: auto;
+.overview div {
+	line-height: 18px;
 }
 
-dl dl dt { 
-	margin-bottom: 0px;
-	font-weight: normal;
+.overview div span {
+	display: inline-block;
+	height: 14px;
 }
 
-
-[data-variable] {
-	background-color: #f0f0f0;
-	border: 1px solid #d3d3d3;
-	margin: 20px;
-	padding: 3px;
-	cursor: col-resize;
-	font-weight: normal;
+.revenues { 
+	background-color: #059;
+	width: 230px;
 }
 
-[data-format=bar] {
-	font: 10px arial;
-	text-shadow: 0px 1px 1px black;
-	color: white;
-	border: 1px solid #444;
-	float: left;
-	clear: both;
-	margin: 1px 0 0;
-	padding: 0 4px 0;
-	box-sizing: border-box;
-	background-color: #666;
-	height: 15px;
-	line-height: 14px;
+.spending {
+	background-color: #7c7;
+	width: 360px;
 }
 
-.locked[data-variable] {
-	border-color: red;
+.deficit {
+	background-color: #ff8;
+	width: 129px;
+}
+
+.surplus {
+	background-color: #fff;
+	width: 129px;
 }

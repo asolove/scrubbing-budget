@@ -2,9 +2,11 @@
 "use strict";
 
 var vars = {};
-var revenue = vars.revenue = new c.Variable({ name: "revenue", value: 3464 });
-var outlays = vars.outlays = new c.Variable({ name: "outlays", value: 3464 });
-var balance = vars.balance = new c.Variable({ name: "balance" });
+var revenues = vars.revenues = new c.Variable({ name: "revenues", value: 3464 });
+var spending = vars.spending = new c.Variable({ name: "spending", value: 3464 });
+var surplus = vars.surplus = new c.Variable({ name: "surplus" });
+var deficit = vars.deficit = new c.Variable({ name: "deficit" });
+
 
 var taxRates = [10, 15, 25, 28, 33, 35, 39.6];
 // FIXME: real numbers
@@ -16,17 +18,17 @@ taxRates.forEach(function(rate, i){
 
 
 var constraints = [
-	new c.Equation(c.minus(revenue, outlays), balance, c.Strength.required, 0),
-	new c.Inequality(revenue, c.GEQ, 0, c.Strength.required, 0),
-	new c.Inequality(outlays, c.GEQ, 0, c.Strength.required, 0),
-	new c.StayConstraint(outlays, c.Strength.medium, 0)
+	new c.Equation(c.minus(revenues, spending), surplus, c.Strength.required, 0),
+	new c.Equation(c.minus(0, surplus), deficit, c.Strength.required, 0),
+	new c.Inequality(revenues, c.GEQ, 0, c.Strength.required, 0),
+	new c.Inequality(spending, c.GEQ, 0, c.Strength.required, 0),
+	new c.StayConstraint(spending, c.Strength.medium, 0)
 ];
 
 var taxRevenue = new c.Expression(0);
 taxRates.forEach(function(rate, i){
 	var rate = vars["tax-bracket-"+i];
 	var nextRate = vars["tax-bracket-"+(i+1)] || 100;
-	console.log(rate.value, nextRate.value || nextRate);
 
 	constraints.splice(0,0,
 		new c.Inequality(rate, c.LEQ, nextRate, c.Strength.required, 0),
@@ -38,7 +40,7 @@ taxRates.forEach(function(rate, i){
 });
 
 constraints.push(
-	new c.Equation(taxRevenue, vars.revenue, c.Strength.required, 0)
+	new c.Equation(taxRevenue, revenues, c.Strength.required, 0)
 );
 
 var s = c.extend(new c.SimplexSolver(), {
@@ -57,23 +59,35 @@ _.forEach(views, function(el){
 	viewForVar[el.dataset.variable] = el;
 });
 
+var scales = {
+	overview: .1
+};
+
+function scale(el, val){
+	return val * (scales[el.dataset.scale] || 1);
+}
+
+function unscale(el, val){
+	return val / (scales[el.dataset.scale] || 1);
+}
+
 function attachControls(){
 	var moving;
 	var startX;
 	var startVal; 
-	var budget = document.getElementById("budget");
 
-	budget.addEventListener("mousedown", function(e){
+	document.body.addEventListener("mousedown", function(e){
 		var varName = e.target.dataset.variable;
 		var variable = vars[varName];
 		if(!variable) return;
 		moving = variable;
 		startX = e.screenX;
 		startVal = variable.value;
+		if(variable.strongStay) s.removeConstraint(variable.strongStay);
 		s.addEditVar(variable, c.Strength.high).beginEdit();
 	});
 
-	budget.addEventListener("dblclick", function(e){
+	document.body.addEventListener("dblclick", function(e){
 		var varName = e.target.dataset.variable;
 		var variable = vars[varName];
 		if(!variable) return;
@@ -87,23 +101,25 @@ function attachControls(){
 		e.target.classList.toggle("locked");
 	});
 
-	budget.addEventListener("mousemove", function(e){
+	document.body.addEventListener("mousemove", function(e){
 		if(!moving) return;
-		s.suggestValue(moving, startVal + e.screenX - startX).resolve();
+		var newValue = startVal + unscale(viewForVar[moving.name], e.screenX - startX);
+		s.suggestValue(moving, newValue).resolve();
 	});
 
-	budget.addEventListener("mouseup", function(e){
+	document.body.addEventListener("mouseup", function(e){
 		if(!moving) return;
-		moving = null;
+
 		s.endEdit();
+		if(moving.strongStay) s.addConstraint(moving.strongStay);
+		moving = null;
 	});
 
 }
 
 var formatters = {
 	bar: function(el, variable){
-		this.percent(el, variable);
-		el.style.width = variable.value+"px";
+		el.style.width = scale(el, variable.value) + "px";
 	},
 
 	percent: function(el, variable){
@@ -121,7 +137,6 @@ function render(){
 	_.each(viewForVar, function(el, varName){
 		var variable = vars[varName];
 		formatters[el.dataset.format](el, variable);
-		console.log("Rendering", variable, el)
 	});
 }
 

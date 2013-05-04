@@ -1,40 +1,27 @@
 <!doctype html>
 <html>
 <head>
-<title>Scrubbing Calculator</title>
+<title>The US Federal Budget</title>
 <link href="styles.css" rel="stylesheet"></link>
 </head>
 <body>
-	<h1>Simple budget</h1>
-	<dl id="budget">
-		<dt>
-			Revenue
-			<span data-variable="revenue" data-format="dollars"></span>
-		</dt>
+	<div class="wrap">
+	<header>
+		<h1>The 2013 US Federal Budget</h1>
+	</header>
 
-		<dd>
-			<dl id="taxes">
-				<dt>Tax Brackets</dt>
-				<span data-variable="tax-bracket-0" data-format="bar"></span>
-				<span data-variable="tax-bracket-1" data-format="bar"></span>
-				<span data-variable="tax-bracket-2" data-format="bar"></span>
-				<span data-variable="tax-bracket-3" data-format="bar"></span>
-				<span data-variable="tax-bracket-4" data-format="bar"></span>
-				<span data-variable="tax-bracket-5" data-format="bar"></span>
-				<span data-variable="tax-bracket-6" data-format="bar"></span>
-			</dl>
-		</dd>
+	<div class="overview">
+		<div class="in">
+			<span class="revenues" data-scale="overview" data-variable="revenues" data-format="bar"></span></span><span class="deficit" data-scale="overview" data-variable="deficit" data-format="bar"></span>
+		</div>
+		<div class="out">
+			<span class="spending" data-scale="overview" data-variable="spending" data-format="bar"></span><span class="surplus" data-scale="overview" data-variable="surplus" data-format="bar"></span>
+		</div>
+	</div>
 
-		<dt>
-			Outlays
-			<span data-variable="outlays" data-format="dollars"></span>
-		</dt>
+	<div class="zoomed">
+	</div>
 
-		<dt>
-			Balance
-			<span data-variable="balance" data-format="dollars"></span>
-		</dt>
-	</dl>
 	<script src="lib/c.js"></script>
 	<script src="lib/underscore.js"></script>
 	<script src="calc.js"></script>
