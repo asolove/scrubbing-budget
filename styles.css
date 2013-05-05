@@ -1,6 +1,6 @@
 body {
 	background-color: #dcdcca;
-	font: 16px/1.5 'Source Sans Pro', sans-serif;
+	font: 14px/1.5 'Source Sans Pro', sans-serif;
 	color: #444;
 	padding: 0; margin: 0;
 
@@ -33,6 +33,14 @@ header span.control {
 	padding-right: 10px;
 	position: relative;
 	border-radius: 2px;
+}
+
+.overview > div {
+	position: relative;
+}
+
+.overview div span {
+	z-index: 3;
 }
 
 header span.control:after,
@@ -68,7 +76,6 @@ header span.locked.control:after,
 .overview {
 	margin-top: 1px;
 	padding: 20px 100px;
-	background-color: white;
 }
 
 .zoomed {
@@ -80,7 +87,7 @@ header span.locked.control:after,
 
 .overview div,
 .zoomed div {
-	line-height: 18px;
+	line-height: 26px;
 }
 
 .overview div span,
@@ -136,6 +143,23 @@ header span.locked.control:after,
 	line-height: 8px;
 }
 
+.zoomed-shows {
+	position: absolute;
+	background: white;
+	top: 0px;
+	left: -2px;
+	height: 22px;
+	width: 400px;
+	z-index: 1;
+}
+
 .overview .in label {
 	color: #889;
+}
+
+.zoomed label {
+	color: #998;
+	display: block;
+	width: 94px;
+	text-align: right;
 }
