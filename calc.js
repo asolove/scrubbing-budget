@@ -2,8 +2,8 @@
 "use strict";
 
 var vars = {};
-var revenues = vars.revenues = new c.Variable({ name: "revenues", value: 3464 });
-var spending = vars.spending = new c.Variable({ name: "spending", value: 3464 });
+var revenues = vars.revenues = new c.Variable({ name: "revenues" });
+var spending = vars.spending = new c.Variable({ name: "spending" });
 var surplus = vars.surplus = new c.Variable({ name: "surplus" });
 var deficit = vars.deficit = new c.Variable({ name: "deficit" });
 
@@ -14,15 +14,38 @@ var dollarsInBracket = [2, 4, 6, 8, 10, 20, 50];
 
 taxRates.forEach(function(rate, i){
 	vars["tax-bracket-"+i] = new c.Variable({ name: "tax-bracket-"+i, value: rate });
-})
+});
 
+/* spending */
+var socialsecurity = vars.socialsecurity = new c.Variable({ name: "socialsecurity", value: 725 });
+var medicaid = vars.medicaid = new c.Variable({ name: "medicaid", value: 275 });
+var medicare = vars.medicare = new c.Variable({ name: "medicare", value: 480 });
+var mandatoryother = vars.mandatoryother = new c.Variable({ name: "mandatoryother", value: 545 });
+var defense = vars.defense = new c.Variable({ name: "defense", value: 700 });
+var nondefense = vars.nondefense = new c.Variable({ name: "nondefense", value: 646 });
+var interest = vars.interest = new c.Variable({ name: "interest", value: 227 });
 
 var constraints = [
 	new c.Equation(c.minus(revenues, spending), surplus, c.Strength.required, 0),
 	new c.Equation(c.minus(0, surplus), deficit, c.Strength.required, 0),
 	new c.Inequality(revenues, c.GEQ, 0, c.Strength.required, 0),
 	new c.Inequality(spending, c.GEQ, 0, c.Strength.required, 0),
-	new c.StayConstraint(spending, c.Strength.medium, 0)
+
+	new c.StayConstraint(socialsecurity, c.Strength.medium, 0),
+	new c.StayConstraint(medicaid, c.Strength.medium, 0),
+	new c.StayConstraint(medicare, c.Strength.medium, 0),
+	new c.StayConstraint(mandatoryother, c.Strength.medium, 0),
+	new c.StayConstraint(defense, c.Strength.medium, 0),
+	new c.StayConstraint(nondefense, c.Strength.medium, 0),
+	new c.StayConstraint(interest, c.Strength.medium, 0),
+	new c.Inequality(socialsecurity, c.GEQ, 0, c.Strength.required, 0),
+	new c.Inequality(medicaid, c.GEQ, 0, c.Strength.required, 0),
+	new c.Inequality(medicare, c.GEQ, 0, c.Strength.required, 0),
+	new c.Inequality(mandatoryother, c.GEQ, 0, c.Strength.required, 0),
+	new c.Inequality(defense, c.GEQ, 0, c.Strength.required, 0),
+	new c.Inequality(nondefense, c.GEQ, 0, c.Strength.required, 0),
+	new c.Inequality(interest, c.GEQ, 0, c.Strength.required, 0),
+	new c.Equation(spending, c.plus(socialsecurity, c.plus(medicaid, c.plus(medicare, c.plus(mandatoryother, c.plus(defense, c.plus(nondefense, interest)))))), c.Strength.required, 10)
 ];
 
 var taxRevenue = new c.Expression(0);
@@ -63,11 +86,11 @@ _.forEach(views, function(el){
 
 var scales = {
 	overview: .1,
-	zoomed: 4
+	zoomed: .2
 };
 
 function scale(el, val){
-	return val * (scales[el.dataset.scale] || 1);
+	return (val > 0 ? val : 0) * (scales[el.dataset.scale] || 1);
 }
 
 function unscale(el, val){
@@ -149,6 +172,8 @@ function render(){
 
 render();
 attachControls();
+console.log(s);
+console.log(surplus);
 
 
 })();
