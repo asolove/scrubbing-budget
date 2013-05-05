@@ -4,6 +4,8 @@ body {
 	color: #444;
 	padding: 0; margin: 0;
 
+	overflow: hidden;
+
  	-moz-user-select: none;
  	-webkit-user-select: none;
  	-ms-user-select: none;
@@ -22,6 +24,45 @@ header {
 header h1 { 
 	font-size: 1em;
 	font-weight: 200;
+	line-height: 1.1;
+}
+
+header span.control {
+	background-color: #ce3549;
+	padding-left: 3px;
+	padding-right: 10px;
+	position: relative;
+	border-radius: 2px;
+}
+
+header span.control:after,
+.overview div span:after,
+.zoomed div span:after {
+	content: " ";
+	display: inline-block;
+	position: absolute;
+	top: 45%;
+	right: 3px;
+	width: 2px;
+	height: 2px;
+	border-radius: 2px;
+	border: 1px solid rgba(255,255,255,0.7);
+	background-color: rgba(255,255,255,0.4);
+	box-shadow: 0px 0px 1px rgba(0,0,0,0.1);
+}
+
+header span.locked.control:after,
+.overview div span.locked:after,
+.zoomed div span.locked:after {
+	border-color: red;
+}
+
+.overview div span:after {
+	top: 35%;
+}
+
+.zoomed div span:after {
+	top: 50%;
 }
 
 .overview {
@@ -34,6 +75,7 @@ header h1 {
 	padding-top: 20px;
 	margin-top: 20px;
 	background-color: white;
+	width: 10000000px;
 }
 
 .overview div,
@@ -46,6 +88,11 @@ header h1 {
 	display: inline-block;
 	height: 14px;
 	border-radius: 1px;
+	position: relative;
+}
+
+.zoomed div span {
+	box-shadow: inset 2px 2px 2px rgba(0,0,0,0.2);
 }
 
 .zoomed div {
