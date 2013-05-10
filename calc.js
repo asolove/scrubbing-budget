@@ -48,7 +48,7 @@ var constraints = [
 	new c.Equation(spending, c.plus(socialsecurity, c.plus(medicaid, c.plus(medicare, c.plus(mandatoryother, c.plus(defense, c.plus(nondefense, interest)))))), c.Strength.required, 10)
 ];
 
-var taxRevenue = new c.Expression(0);
+var incomeTax = vars.incomeTax = new c.Expression(0);
 taxRates.forEach(function(rate, i){
 	var rate = vars["tax-bracket-"+i];
 	var nextRate = vars["tax-bracket-"+(i+1)] || 100;
@@ -59,11 +59,21 @@ taxRates.forEach(function(rate, i){
 		new c.StayConstraint(rate, c.Strength.medium, 0)
 	);
 
-	taxRevenue = (new c.Expression(rate)).times(dollarsInBracket[i]).plus(taxRevenue);
+	incomeTax = (new c.Expression(rate)).times(dollarsInBracket[i]).plus(incomeTax);
 });
 
+var corporateTax = vars.corporateTax = new c.Variable({ name: "corporateTax", value: 181 });
+var socialTax = vars.socialTax = new c.Variable({ name: "socialTax", value: 819 });
+var otherTax = vars.otherTax = new c.Variable({ name: "otherTax", value: 211 });
+
+
+constraints.push(new c.StayConstraint(corporateTax, c.Strength.strong, 0));
+constraints.push(new c.StayConstraint(socialTax, c.Strength.strong, 0));
+constraints.push(new c.StayConstraint(otherTax, c.Strength.strong, 0));
+
 constraints.push(
-	new c.Equation(taxRevenue, revenues, c.Strength.required, 0)
+	new c.Equation(c.plus(c.plus(incomeTax, corporateTax), c.plus(socialTax, otherTax)), 
+			revenues, c.Strength.required, 0)
 );
 
 var s = c.extend(new c.SimplexSolver(), {
