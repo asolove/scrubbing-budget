@@ -27,7 +27,7 @@ header h1 {
 	line-height: 1.1;
 }
 
-header span.control {
+header .control {
 	background-color: #ce3549;
 	padding-left: 3px;
 	padding-right: 10px;
@@ -35,17 +35,19 @@ header span.control {
 	border-radius: 2px;
 }
 
+div[data-variable] { display: inline-block;}
+
 .overview > div {
 	position: relative;
 }
 
-.overview div span {
+.overview div div {
 	z-index: 3;
 }
 
-header span.control:after,
-.overview div span:after,
-.zoomed div span:after {
+header .control:after,
+.overview div div:after,
+.zoomed div div:after {
 	content: " ";
 	display: inline-block;
 	position: absolute;
@@ -59,17 +61,17 @@ header span.control:after,
 	box-shadow: 0px 0px 1px rgba(0,0,0,0.1);
 }
 
-header span.locked.control:after,
-.overview div span.locked:after,
-.zoomed div span.locked:after {
+header .locked.control:after,
+.overview div div.locked:after,
+.zoomed div div.locked:after {
 	border-color: red;
 }
 
-.overview div span:after {
+.overview div div:after {
 	top: 35%;
 }
 
-.zoomed div span:after {
+.zoomed div div:after {
 	top: 50%;
 }
 
@@ -85,29 +87,20 @@ header span.locked.control:after,
 	width: 10000000px;
 }
 
-.overview div,
-.zoomed div {
-	line-height: 26px;
-}
-
-.overview div span,
-.zoomed div span {
+.overview div div,
+.zoomed div div {
 	display: inline-block;
 	height: 14px;
 	border-radius: 1px;
 	position: relative;
 }
 
-.zoomed div span {
+.zoomed div div {
 	box-shadow: inset 2px 2px 2px rgba(0,0,0,0.2);
 }
 
-.zoomed div {
-	line-height: 35px;
-}
 
-
-.zoomed div span {
+.zoomed div div {
 	height: 60px;
 	border-radius: 2px;
 }
@@ -143,7 +136,7 @@ header span.locked.control:after,
 	line-height: 8px;
 }
 
-.zoomed-shows {
+.overview div div.zoomed-shows {
 	position: absolute;
 	background: white;
 	top: 0px;
@@ -162,4 +155,21 @@ header span.locked.control:after,
 	display: block;
 	width: 94px;
 	text-align: right;
+}
+
+.overview [data-variable] {
+	color: transparent;
+}
+
+.zoomed [data-variable] {
+	color: #fff;
+}
+
+.zoomed [data-variable] span {
+	display: block;
+	padding: 10px;
+	line-height: 1;
+}
+
+.zoomed [data-variable] small {
 }

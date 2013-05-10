@@ -10,7 +10,7 @@ var deficit = vars.deficit = new c.Variable({ name: "deficit" });
 
 var taxRates = [10, 15, 25, 28, 33, 35, 39.6];
 // FIXME: real numbers
-var dollarsInBracket = [2, 4, 6, 8, 10, 20, 50];
+var dollarsInBracket = [1, 2, 3, 4, 5, 6, 13];
 
 taxRates.forEach(function(rate, i){
 	vars["tax-bracket-"+i] = new c.Variable({ name: "tax-bracket-"+i, value: rate });
@@ -48,7 +48,7 @@ var constraints = [
 	new c.Equation(spending, c.plus(socialsecurity, c.plus(medicaid, c.plus(medicare, c.plus(mandatoryother, c.plus(defense, c.plus(nondefense, interest)))))), c.Strength.required, 10)
 ];
 
-var incomeTax = vars.incomeTax = new c.Expression(0);
+var incomeTaxRevenue = new c.Expression(0);
 taxRates.forEach(function(rate, i){
 	var rate = vars["tax-bracket-"+i];
 	var nextRate = vars["tax-bracket-"+(i+1)] || 100;
@@ -59,9 +59,12 @@ taxRates.forEach(function(rate, i){
 		new c.StayConstraint(rate, c.Strength.medium, 0)
 	);
 
-	incomeTax = (new c.Expression(rate)).times(dollarsInBracket[i]).plus(incomeTax);
+	incomeTaxRevenue = (new c.Expression(rate)).times(dollarsInBracket[i]).plus(incomeTaxRevenue);
+	console.log(rate, dollarsInBracket[i]);
 });
 
+var incomeTax = vars.incomeTax = new c.Variable({ name: "incomeTax", value: 1100 });
+constraints.push(new c.Equation(incomeTax, incomeTaxRevenue, c.Strength.required, 0));
 var corporateTax = vars.corporateTax = new c.Variable({ name: "corporateTax", value: 181 });
 var socialTax = vars.socialTax = new c.Variable({ name: "socialTax", value: 819 });
 var otherTax = vars.otherTax = new c.Variable({ name: "otherTax", value: 211 });
@@ -96,7 +99,7 @@ _.forEach(views, function(el){
 
 var scales = {
 	overview: .1,
-	zoomed: .2
+	zoomed: .4
 };
 
 function scale(el, val){
@@ -158,6 +161,7 @@ function attachControls(){
 var formatters = {
 	bar: function(el, variable){
 		el.style.width = scale(el, variable.value) + "px";
+		el.innerHTML = "<span>" + variable.name + " <small>$" + Math.round(variable.value) + "b</small></span>";
 	},
 
 	percent: function(el, variable){
