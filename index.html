@@ -3,45 +3,126 @@
 <head>
 <title>The US Federal Budget</title>
 <link href="styles.css" rel="stylesheet"></link>
-<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<div class="wrap">
-	<header>
-		<h1>The <span class="control dropdown">2013</span> US Federal <span class="control dropdown">Budget</span></h1>
-	</header>
+<div id="wrap">
 
 	<div class="overview">
-		<div class="in">
-			<label>Revenues</label>
-			<div class="revenues" data-scale="overview" data-variable="revenues" data-format="bar"></div><div class="deficit" data-scale="overview" data-variable="deficit" data-format="bar"></div>
-			<div class="zoomed-shows"></div>
+		<div class="row">
+			<div class="revenues item">
+				<div class="bar"></div>
+				<label>Revenues $2,300b</label>
+			</div>
+			<div class="deficit item">
+				<div class="bar"></div>
+				<label>Deficit $1,300b</label>
+			</div>
 		</div>
-		<div class="out">
-			<label>Spending</label>
-			<div class="spending" data-scale="overview" data-variable="spending" data-format="bar"></div><div class="surplus" data-scale="overview" data-variable="surplus" data-format="bar"></div>
-			<div class="zoomed-shows"></div>
-		</div>
-	</div>
-
-	<div class="zoomed">
-		<div class="in">
-			<label>Revenues</label>
-			<div class="revenues" data-scale="zoomed" data-variable="tax-bracket-0-revenue" data-format="bar"></div><div class="revenues" data-scale="zoomed" data-variable="tax-bracket-1-revenue" data-format="bar"></div><div class="revenues" data-scale="zoomed" data-variable="tax-bracket-2-revenue" data-format="bar"></div><div class="revenues" data-scale="zoomed" data-variable="tax-bracket-3-revenue" data-format="bar"></div><div class="revenues" data-scale="zoomed" data-variable="tax-bracket-4-revenue" data-format="bar"></div><div class="revenues" data-scale="zoomed" data-variable="tax-bracket-5-revenue" data-format="bar"></div><div class="revenues" data-scale="zoomed" data-variable="tax-bracket-6-revenue" data-format="bar"></div>
-			<div class="revenues" data-scale="zoomed" data-variable="incomeTax" data-format="bar"></div>
-			<div class="revenues" data-scale="zoomed" data-variable="incomeTax" data-format="bar"></div><div class="revenues" data-scale="zoomed" data-variable="socialTax" data-format="bar"></div><div class="revenues" data-scale="zoomed" data-variable="corporateTax" data-format="bar"></div><div class="revenues" data-scale="zoomed" data-variable="otherTax" data-format="bar"></div><div class="deficit" data-scale="zoomed" data-variable="deficit" data-format="bar"></div>
-
-		</div>
-	</div>
-	<div class="zoomed">
-		<div class="out">
-			<label>Spending</label>
-			<div class="spending" data-scale="zoomed" data-variable="socialsecurity" data-format="bar"></div><div class="spending" data-scale="zoomed" data-variable="medicare" data-format="bar"></div><div class="spending" data-scale="zoomed" data-variable="medicaid" data-format="bar"></div><div class="spending" data-scale="zoomed" data-variable="mandatoryother" data-format="bar"></div><div class="spending" data-scale="zoomed" data-variable="defense" data-format="bar"></div><div class="spending" data-scale="zoomed" data-variable="nondefense" data-format="bar"></div><div class="spending" data-scale="zoomed" data-variable="interest" data-format="bar"></div><div class="surplus" data-scale="zoomed" data-variable="surplus" data-format="bar"></div>
+		<div class="row">
+			<div class="spending item">
+				<div class="bar"></div>
+				<label>Spending $3,600b</label>
+			</div>
 		</div>
 	</div>
 
-	<script src="lib/c.js"></script>
-	<script src="lib/underscore.js"></script>
-	<script src="calc.js"></script>
+	<div class="zoomed revenues">
+		<div class="row">
+			<div class="item greyed" style="width:230px">
+				<div class="bar"></div>
+				<label>mething, $230b</label>
+			</div>
+
+			<div class="item personalTax">
+				<div class="item rate1" style="width:10px">
+					<div class="bar"></div>
+				</div>
+
+				<div class="item rate2" style="width:20px">
+					<div class="bar"></div>
+				</div>
+
+				<div class="item rate3" style="width:40px">
+					<div class="bar"></div>
+				</div>
+
+				<div class="item rate4" style="width:60px">
+					<div class="bar"></div>
+				</div>
+
+				<div class="item rate5" style="width:100px">
+					<div class="bar"></div>
+				</div>
+
+				<div class="item rate6" style="width:200px">
+					<div class="bar"></div>
+				</div>
+
+				<div class="item rate7" style="width:500px">
+					<div class="bar"></div>
+				</div>
+
+				<label>
+					<div class="tax-rates">
+
+						Personal income tax rates
+						<dl>
+							<dt>10%</dt>
+							<dd class="rate1" style="width:10px"><div class="bar"></div></dd>
+							<dt>15%</dt>
+							<dd class="rate2" style="width:15px"><div class="bar"></div></dd>
+							<dt>25%</dt>
+							<dd class="rate3" style="width:25px"><div class="bar"></div></dd>
+							<dt>28%</dt>
+							<dd class="rate4" style="width:28px"><div class="bar"></div></dd>
+							<dt>33%</dt>
+							<dd class="rate5" style="width:33px"><div class="bar"></div></dd>
+							<dt>35%</dt>
+							<dd class="rate6" style="width:35px"><div class="bar"></div></dd>
+							<dt>40%</dt>
+							<dd class="rate7" style="width:40px"><div class="bar"></div></dd>
+						</dl>
+					</div>
+				</label>
+			</div>
+
+			<div class="item greyed" style="width:230px">
+				<div class="bar"></div>
+				<label>Something, $230b</label>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="zoomed spending">
+		<div class="row">
+			<div class="item greyed" style="width:50px">
+				<div class="bar"></div>
+				<label>ing, $230b</label>
+			</div>
+
+			<div class="item" style="width:100px">
+				<div class="bar"></div>
+				<label>Education, $20b</label>
+			</div>
+
+			<div class="item" style="width:200px">
+				<div class="bar"></div>
+				<label>Transportation, $40b</label>
+			</div>
+
+			<div class="item" style="width:350px">
+				<div class="bar"></div>
+				<label>Justice, $100b</label>
+			</div>
+
+
+			<div class="item greyed" style="width:230px">
+				<div class="bar"></div>
+				<label>Something, $230b</label>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>

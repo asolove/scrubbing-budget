@@ -1,175 +1,106 @@
+* { box-sizing: border-box;}
+
 body {
-	background-color: #dcdcca;
-	font: 14px/1.5 'Source Sans Pro', sans-serif;
-	color: #444;
-	padding: 0; margin: 0;
-
-	overflow: hidden;
-
- 	-moz-user-select: none;
- 	-webkit-user-select: none;
- 	-ms-user-select: none;
+	padding: 30px;
+	color: #555;
+	margin: 0;
+	font: 14px/1.4 georgia;
+	background: #f0f0f0;
 }
 
-header {
-	margin-left: 100px;
-	display: inline-block;
-	text-transform: uppercase;
-	font-size: 1.2em;
-	background-color: #e53b51;
-	color: #fff;
-	padding: 5px 20px;
+.row {
+	margin-bottom: 10px;
+	clear: both;
+	overflow: auto;
 }
 
-header h1 { 
-	font-size: 1em;
-	font-weight: 200;
-	line-height: 1.1;
+.item {
+	float: left;
 }
 
-header .control {
-	background-color: #ce3549;
-	padding-left: 3px;
-	padding-right: 10px;
-	position: relative;
-	border-radius: 2px;
+.item .bar {
+	height:20px;
+	width: 100%;
+	background-color: #ccc;
+	border: 1px solid rgba(0,0,0,0.2);
 }
 
-div[data-variable] { display: inline-block;}
-
-.overview > div {
-	position: relative;
+.item label {
+	font-size: 13px;
+	padding-left: 4px;
+	display: block;
+	clear: left;
 }
 
-.overview div div {
-	z-index: 3;
+.item.revenues {
+	width: 460px;
+}
+.item.revenues .bar {
+	background: rgba(50,205,100,0.3);
 }
 
-header .control:after,
-.overview div div:after,
-.zoomed div div:after {
-	content: " ";
-	display: inline-block;
-	position: absolute;
-	top: 45%;
-	right: 3px;
-	width: 2px;
-	height: 2px;
-	border-radius: 2px;
-	border: 1px solid rgba(255,255,255,0.7);
-	background-color: rgba(255,255,255,0.4);
-	box-shadow: 0px 0px 1px rgba(0,0,0,0.1);
+.item.deficit {
+	width: 260px;
+}
+.item.deficit .bar {
+	background: rgba(205,50,100,0.3);
 }
 
-header .locked.control:after,
-.overview div div.locked:after,
-.zoomed div div.locked:after {
-	border-color: red;
+.item.spending {
+	width: 720px;
+}
+.item.spending .bar {
+	background: rgba(100,50,205,0.3);
 }
 
-.overview div div:after {
-	top: 35%;
-}
-
-.zoomed div div:after {
-	top: 50%;
-}
-
-.overview {
-	margin-top: 1px;
-	padding: 20px 100px;
+.item.greyed {
+	opacity: 0.3;
 }
 
 .zoomed {
-	padding-top: 20px;
-	margin-top: 20px;
 	background-color: white;
-	width: 10000000px;
+	margin: 20px -30px;
+	padding: 30px 0px;
 }
 
-.overview div div,
-.zoomed div div {
-	display: inline-block;
-	height: 14px;
-	border-radius: 1px;
-	position: relative;
+.zoomed.revenues .item.greyed .bar {
+	background: rgba(50,205,100,0.3);
 }
 
-.zoomed div div {
-	box-shadow: inset 2px 2px 2px rgba(0,0,0,0.2);
+.rate1 .bar { background: rgba(50,205,100,0.95); }
+.rate2 .bar { background: rgba(50,205,100,0.8); }
+.rate3 .bar { background: rgba(50,205,100,0.65); }
+.rate4 .bar { background: rgba(50,205,100,0.5); }
+.rate5 .bar { background: rgba(50,205,100,0.35); }
+.rate6 .bar { background: rgba(50,205,100,0.2); }
+.rate7 .bar { background: rgba(50,205,100,0.1); }
+
+.zoomed .item .tax-rates .bar { height: 15px;}
+.tax-rates dt { float: left; text-align:right; width:20px;}
+.tax-rates dd { height: 20px;}
+
+.zoomed .item .bar {
+	height: 40px;
 }
 
 
-.zoomed div div {
-	height: 60px;
-	border-radius: 2px;
+.zoomed.spending .item.greyed .bar {
+	background: rgba(100,50,205,0.3);
 }
 
-.revenues { 
-	background-color: #4E5279;
-	width: 230px;
-}
+.zoomed.spending .item:nth-child(7n)   .bar { background: rgba(100,50,205,0.95); }
+.zoomed.spending .item:nth-child(7n+1) .bar { background: rgba(100,50,205,0.8); }
+.zoomed.spending .item:nth-child(7n+2) .bar { background: rgba(100,50,205,0.65); }
+.zoomed.spending .item:nth-child(7n+3) .bar { background: rgba(100,50,205,0.5); }
+.zoomed.spending .item:nth-child(7n+4) .bar { background: rgba(100,50,205,0.35); }
+.zoomed.spending .item:nth-child(7n+5) .bar { background: rgba(100,50,205,0.2); }
+.zoomed.spending .item:nth-child(7n+6) .bar { background: rgba(100,50,205,0.1); }
 
-.spending {
-	background-color: #9f7055;
-	width: 360px;
-}
 
-.deficit {
-	background-color: #e53b51;
-	width: 129px;
-}
 
-.surplus {
-	background-color: #3cb5b5;
-	width: 129px;
-}
 
-.overview label {
-	color: #998;
-	display: inline-block;
-	margin-left: -86px;
-	margin-right: 4px;
-	width: 80px;
-	text-align: right;
-	font-size:.75em;
-	line-height: 8px;
-}
 
-.overview div div.zoomed-shows {
-	position: absolute;
-	background: white;
-	top: 0px;
-	left: -2px;
-	height: 22px;
-	width: 400px;
-	z-index: 1;
-}
 
-.overview .in label {
-	color: #889;
-}
 
-.zoomed label {
-	color: #998;
-	display: block;
-	width: 94px;
-	text-align: right;
-}
 
-.overview [data-variable] {
-	color: transparent;
-}
-
-.zoomed [data-variable] {
-	color: #fff;
-}
-
-.zoomed [data-variable] span {
-	display: block;
-	padding: 10px;
-	line-height: 1;
-}
-
-.zoomed [data-variable] small {
 }
