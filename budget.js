@@ -47,6 +47,22 @@ var USFederalSpending = CassowaryModel.Model.extend({
 	}
 });
 
+var USFederalRevenueBreakdown = Backbone.View.extend({
+	initialize: function(){
+		this.selectedSection = null;
+	},
+
+	selectSection: function(sectionName){
+		if(this.selectedSection) this.deselectSection(this.selectedSection);
+		this.selectedSection = sectionName;
+		
+	}
+});
+
+var spending = new USFederalSpending();
+var spendingOverview = new USFederalSpendingOverview({ model: spending });
+var revenueBreakdown = new USFederalRevenueBreakdown({ model: spending.revenue });
+var revenueBreakdown = new USFederalRevenueBreakdown({ model: spending.revenue });
 
 /* parsing */
 var operators = [">=", "<=", ">", "<", "=", "+", "-", "*"];

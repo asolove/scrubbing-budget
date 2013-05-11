@@ -52,14 +52,18 @@ var incomeTaxRevenue = new c.Expression(0);
 taxRates.forEach(function(rate, i){
 	var rate = vars["tax-bracket-"+i];
 	var nextRate = vars["tax-bracket-"+(i+1)] || 100;
+	var revenueForBracket = new c.Expression(rate).times(dollarsInBracket[i]);
+	var varName =  "tax-bracket-"+i+"-revenue";
+	var revenueForBracketVar = vars[varName] = new c.Variable({ name: varName });
 
 	constraints.splice(0,0,
 		new c.Inequality(rate, c.LEQ, nextRate, c.Strength.required, 0),
 		new c.Inequality(rate, c.GEQ, 0, c.Strength.required, 0),
+		new c.Equation(revenueForBracketVar, revenueForBracket, c.Strength.required, 0),
 		new c.StayConstraint(rate, c.Strength.medium, 0)
 	);
 
-	incomeTaxRevenue = (new c.Expression(rate)).times(dollarsInBracket[i]).plus(incomeTaxRevenue);
+	incomeTaxRevenue = revenueForBracket.plus(incomeTaxRevenue);
 	console.log(rate, dollarsInBracket[i]);
 });
 
@@ -99,7 +103,7 @@ _.forEach(views, function(el){
 
 var scales = {
 	overview: .1,
-	zoomed: .4
+	zoomed: 1
 };
 
 function scale(el, val){
