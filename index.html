@@ -10,20 +10,20 @@
 	<div class="overview">
 		<div class="row">
 			<div class="shown"></div>
-			<div class="revenues item">
+			<div class="revenues item" data-variable="revenues" data-format="barSection" data-scale="overview">
 				<div class="bar"></div>
-				<label>Revenues $2,300b</label>
+				<label>Revenues <span data-format="bDollars">$2,300b</span></label>
 			</div>
-			<div class="deficit item">
+			<div class="deficit item" data-variable="deficit" data-format="barSection" data-scale="overview">
 				<div class="bar"></div>
-				<label>Deficit $1,300b</label>
+				<label>Deficit <span data-format="bDollars">$1,300b</span></label>
 			</div>
 		</div>
 		<div class="row">
 			<div class="shown"></div>
-			<div class="spending item">
+			<div class="spending item" data-variable="spending" data-format="barSection" data-scale="overview">
 				<div class="bar"></div>
-				<label>Spending $3,600b</label>
+				<label>Spending <span data-format="bDollars">$3,600b</span></label>
 			</div>
 		</div>
 	</div>
@@ -131,17 +131,9 @@
 	</div>
 </div>
 
-<script>
-var zoomRatio = 3;
-
-
-[0,1].forEach(function(i){
-	document.querySelectorAll(".zoomed .row")[i].addEventListener("scroll", function(e){
-		var left = e.target.scrollLeft;
-		document.querySelectorAll(".overview .shown")[i].style.left = left/zoomRatio+"px";
-	});
-});
-</script>
+<script src="lib/c.js"></script>
+<script src="lib/underscore.js"></script>
+<script src="calc.js"></script>
 
 </body>
 </html>

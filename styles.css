@@ -50,27 +50,15 @@ body {
 	z-index: 1;
 	box-shadow: 1px 1px 1px rgba(0,0,0,0.2);
 }
-.row:last-child .shown {
-	left: 300px;
-}
 
-.item.revenues {
-	width: 460px;
-}
 .item.revenues .bar {
 	background: rgba(50,205,100,0.3);
 }
 
-.item.deficit {
-	width: 260px;
-}
 .item.deficit .bar {
 	background: rgba(205,50,100,0.3);
 }
 
-.item.spending {
-	width: 720px;
-}
 .item.spending .bar {
 	background: rgba(100,50,205,0.3);
 }

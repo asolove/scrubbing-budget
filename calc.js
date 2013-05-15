@@ -64,7 +64,6 @@ taxRates.forEach(function(rate, i){
 	);
 
 	incomeTaxRevenue = revenueForBracket.plus(incomeTaxRevenue);
-	console.log(rate, dollarsInBracket[i]);
 });
 
 var incomeTax = vars.incomeTax = new c.Variable({ name: "incomeTax", value: 1100 });
@@ -114,6 +113,13 @@ function unscale(el, val){
 	return val / (scales[el.dataset.scale] || 1);
 }
 
+// find nearest thing with a variable
+function findTarget(el){
+	if(el.dataset.variable) return el;
+	if(el.parentNode.dataset.variable) return el.parentNode;
+	return el;
+}
+
 function attachControls(){
 	var moving;
 	var movingView;
@@ -121,29 +127,16 @@ function attachControls(){
 	var startVal; 
 
 	document.body.addEventListener("mousedown", function(e){
-		var varName = e.target.dataset.variable;
+		var target = findTarget(e.target);
+		var varName = target.dataset.variable;
 		var variable = vars[varName];
 		if(!variable) return;
 		moving = variable;
-		movingView = e.target;
+		movingView = target;
 		startX = e.screenX;
 		startVal = variable.value;
 		if(variable.strongStay) s.removeConstraint(variable.strongStay);
 		s.addEditVar(variable, c.Strength.high).beginEdit();
-	});
-
-	document.body.addEventListener("dblclick", function(e){
-		var varName = e.target.dataset.variable;
-		var variable = vars[varName];
-		if(!variable) return;
-		if(variable.strongStay){
-			s.removeConstraint(variable.strongStay);
-			variable.strongStay = false;
-		} else {
-			variable.strongStay = new c.StayConstraint(variable, c.Strength.required, variable.value);
-			s.addConstraint(variable.strongStay);
-		}
-		e.target.classList.toggle("locked");
 	});
 
 	document.body.addEventListener("mousemove", function(e){
@@ -160,12 +153,32 @@ function attachControls(){
 		moving = null;
 	});
 
+	document.body.addEventListener("dblclick", function(e){
+		var target = findTarget(e.target);
+		var varName = target.dataset.variable;
+		var variable = vars[varName];
+		if(!variable) return;
+		if(variable.strongStay){
+			s.removeConstraint(variable.strongStay);
+			variable.strongStay = false;
+		} else {
+			variable.strongStay = new c.StayConstraint(variable, c.Strength.required, variable.value);
+			s.addConstraint(variable.strongStay);
+		}
+		target.classList.toggle("locked");
+	});
 }
 
 var formatters = {
-	bar: function(el, variable){
+	barSection: function(el, variable){
 		el.style.width = scale(el, variable.value) + "px";
-		el.innerHTML = "<span>" + variable.name + " <small>$" + Math.round(variable.value) + "b</small></span>";
+		[].slice.call(el.querySelectorAll("[data-format]")).forEach(function(el){
+			formatters[el.dataset.format](el, variable);
+		});
+	},
+
+	bDollars: function(el, variable){
+		el.innerHTML = "$" + variable.value.toFixed(0) + "b";
 	},
 
 	percent: function(el, variable){
@@ -186,12 +199,22 @@ function render(){
 			formatters[el.dataset.format](el, variable);
 		});
 	});
+
+
+	// update zoom location markers
+	var zoomRatio = 3;
+	[0,1].forEach(function(i){
+		document.querySelectorAll(".zoomed .row")[i].addEventListener("scroll", function(e){
+			var left = e.target.scrollLeft;
+			document.querySelectorAll(".overview .shown")[i].style.left = left/zoomRatio+"px";
+		});
+	});
+
 }
+
 
 render();
 attachControls();
-console.log(s);
-console.log(surplus);
 
 
 })();
