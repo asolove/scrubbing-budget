@@ -24,6 +24,16 @@ body {
 	float: left;
 }
 
+[data-variable],
+[data-variable] label {
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: col-resize;
+}
+
 .item .bar {
 	height:20px;
 	width: 100%;
@@ -33,11 +43,42 @@ body {
 	z-index: 2;
 }
 
+
+.item .bar:after {
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  -webkit-font-smoothing: antialiased;
+  content: "\f0c9";
+  position: absolute;
+  top: 50%;
+  margin-top: -9px;
+  right: 2px;
+  color: rgba(255,255,255,0.8);
+  -webkit-transform: rotate(90deg);
+}
+
 .item label {
 	font-size: 13px;
 	padding-left: 4px;
 	display: block;
 	clear: left;
+}
+
+.item label:after {
+  padding-left: 5px;
+  content: "\f023";
+  color: rgba(205,50,100,0);
+  font-family: FontAwesome;
+}
+
+.item label:hover:after {
+  color: rgba(205,50,100,0.3);
+}
+
+.item.locked label:after {
+  color: rgba(205,50,100,1);
 }
 
 .row .shown {
@@ -107,10 +148,12 @@ body {
 .zoomed.spending .item:nth-child(7n+6) .bar { background: rgba(100,50,205,0.1); }
 
 
-
-
-
-
-
-
+/* Icon font */
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('lib/font-awesome/font/fontawesome-webfont.eot?v=3.1.0');
+  src: url('lib/font-awesome/font/fontawesome-webfont.eot?#iefix&v=3.1.0') format('embedded-opentype'), url('lib/font-awesome/font/fontawesome-webfont.woff?v=3.1.0') format('woff'), url('lib/font-awesome/font/fontawesome-webfont.ttf?v=3.1.0') format('truetype'), url('lib/font-awesome/font/fontawesome-webfont.svg#fontawesomeregular?v=3.1.0') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
+
