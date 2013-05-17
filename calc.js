@@ -57,7 +57,7 @@ taxRates.forEach(function(rate, i){
 	var revenueForBracketVar = vars[varName] = new c.Variable({ name: varName });
 
 	constraints.splice(0,0,
-		new c.Inequality(rate, c.LEQ, nextRate, c.Strength.required, 0),
+		new c.Inequality(rate, c.LEQ, c.minus(nextRate, 1), c.Strength.required, 0),
 		new c.Inequality(rate, c.GEQ, 0, c.Strength.required, 0),
 		new c.Equation(revenueForBracketVar, revenueForBracket, c.Strength.required, 0),
 		new c.StayConstraint(rate, c.Strength.medium, 0)
@@ -82,11 +82,7 @@ constraints.push(
 			revenues, c.Strength.required, 0)
 );
 
-var s = c.extend(new c.SimplexSolver(), {
-	onsolved: function(){
-		render();
-	}
-});
+var s = c.extend(new c.SimplexSolver(), { onsolved: render });
 
 constraints.forEach(function(c){ s.addConstraint(c); });
 s.resolve();
@@ -102,7 +98,8 @@ _.forEach(views, function(el){
 
 var scales = {
 	overview: .1,
-	zoomed: 1
+	zoomed: 1,
+	taxRate: 4
 };
 
 function scale(el, val){
@@ -187,6 +184,10 @@ var formatters = {
 		[].slice.call(el.querySelectorAll("[data-format]")).forEach(function(el){
 			formatters[el.dataset.format](el, variable);
 		});
+	},
+
+	taxRate: function(el, variable){
+		el.style.width = scale(el, variable.value) + "px";
 	},
 
 	bDollars: function(el, variable){
