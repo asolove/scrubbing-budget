@@ -120,6 +120,18 @@ function findTarget(el){
 	return el;
 }
 
+// fixme: locked css class should be propagated by event, not here
+function addStay(variable, el){
+	if(variable.strongStay){
+		s.removeConstraint(variable.strongStay);
+		variable.strongStay = false;
+	} else {
+		variable.strongStay = new c.StayConstraint(variable, c.Strength.required, variable.value);
+		s.addConstraint(variable.strongStay);
+	}
+	el.classList.toggle("locked");
+}
+
 function attachControls(){
 	var moving;
 	var movingView;
@@ -130,7 +142,10 @@ function attachControls(){
 		var target = findTarget(e.target);
 		var varName = target.dataset.variable;
 		var variable = vars[varName];
+
 		if(!variable) return;
+		if(e.target.tagName === "LABEL") return addStay(variable, target)
+
 		moving = variable;
 		movingView = target;
 		startX = e.screenX;
@@ -151,21 +166,6 @@ function attachControls(){
 		s.endEdit();
 		if(moving.strongStay) s.addConstraint(moving.strongStay);
 		moving = null;
-	});
-
-	document.body.addEventListener("dblclick", function(e){
-		var target = findTarget(e.target);
-		var varName = target.dataset.variable;
-		var variable = vars[varName];
-		if(!variable) return;
-		if(variable.strongStay){
-			s.removeConstraint(variable.strongStay);
-			variable.strongStay = false;
-		} else {
-			variable.strongStay = new c.StayConstraint(variable, c.Strength.required, variable.value);
-			s.addConstraint(variable.strongStay);
-		}
-		target.classList.toggle("locked");
 	});
 }
 
