@@ -14,10 +14,12 @@ body {
 	overflow: auto;
 	padding-top:3px;
 	position: relative;
+  padding-bottom: 20px;
 }
 
 .row-inner {
 	width: 1000000px;
+  padding: 0 20px;
 }
 
 .item {
@@ -64,6 +66,12 @@ body {
 	padding-left: 4px;
 	display: block;
 	clear: left;
+  width: 100%;
+  overflow: none;
+}
+
+.overview .item label {
+  height: 1.5em;
 }
 
 .item label:after {
@@ -139,13 +147,13 @@ body {
 	background: rgba(100,50,205,0.3);
 }
 
-.zoomed.spending .item:nth-child(7n)   .bar { background: rgba(100,50,205,0.95); }
-.zoomed.spending .item:nth-child(7n+1) .bar { background: rgba(100,50,205,0.8); }
-.zoomed.spending .item:nth-child(7n+2) .bar { background: rgba(100,50,205,0.65); }
+.zoomed.spending .item:nth-child(7n)   .bar { background: rgba(100,50,205,0.4); }
+.zoomed.spending .item:nth-child(7n+1) .bar { background: rgba(100,50,205,0.5); }
+.zoomed.spending .item:nth-child(7n+2) .bar { background: rgba(100,50,205,0.4); }
 .zoomed.spending .item:nth-child(7n+3) .bar { background: rgba(100,50,205,0.5); }
-.zoomed.spending .item:nth-child(7n+4) .bar { background: rgba(100,50,205,0.35); }
-.zoomed.spending .item:nth-child(7n+5) .bar { background: rgba(100,50,205,0.2); }
-.zoomed.spending .item:nth-child(7n+6) .bar { background: rgba(100,50,205,0.1); }
+.zoomed.spending .item:nth-child(7n+4) .bar { background: rgba(100,50,205,0.4); }
+.zoomed.spending .item:nth-child(7n+5) .bar { background: rgba(100,50,205,0.5); }
+.zoomed.spending .item:nth-child(7n+6) .bar { background: rgba(100,50,205,0.4); }
 
 
 /* Icon font */

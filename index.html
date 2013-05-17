@@ -101,31 +101,47 @@
 	<div class="zoomed spending">
 		<div class="row">
 			<div class="row-inner">
-				<div class="item greyed" style="width:50px">
-					<div class="bar"></div>
-					<label>ing, $230b</label>
-				</div>
 
-				<div class="item" style="width:100px">
-					<div class="bar"></div>
-					<label>Education, $20b</label>
-				</div>
-
-				<div class="item" style="width:200px">
-					<div class="bar"></div>
-					<label>Transportation, $40b</label>
-				</div>
-
-				<div class="item" style="width:350px">
-					<div class="bar"></div>
-					<label>Justice, $100b</label>
-				</div>
+<!--
+				var socialsecurity = vars.socialsecurity = new c.Variable({ name: "socialsecurity", value: 725 });
+var medicaid = vars.medicaid = new c.Variable({ name: "medicaid", value: 275 });
+var medicare = vars.medicare = new c.Variable({ name: "medicare", value: 480 });
+var mandatoryother = vars.mandatoryother = new c.Variable({ name: "mandatoryother", value: 545 });
+var defense = vars.defense = new c.Variable({ name: "defense", value: 700 });
+var nondefense = vars.nondefense = new c.Variable({ name: "nondefense", value: 646 });
+var interest = vars.interest = new c.Variable({ name: "interest", value: 227 });
+-->
 
 
-				<div class="item greyed" style="width:2300px">
+				<div class="item" data-variable="socialsecurity" data-format="barSection">
 					<div class="bar"></div>
-					<label>Something, $230b</label>
+					<label>Social Security, <span data-format="bDollars">$20b</span></label>
 				</div>
+				<div class="item" data-variable="medicare" data-format="barSection">
+					<div class="bar"></div>
+					<label>Medicare, <span data-format="bDollars">$20b</span></label>
+				</div>
+				<div class="item" data-variable="medicaid" data-format="barSection">
+					<div class="bar"></div>
+					<label>Medicaid, <span data-format="bDollars">$20b</span></label>
+				</div>
+				<div class="item" data-variable="mandatoryother" data-format="barSection">
+					<div class="bar"></div>
+					<label>Other mandatory spending, <span data-format="bDollars">$20b</span></label>
+				</div>
+				<div class="item" data-variable="defense" data-format="barSection">
+					<div class="bar"></div>
+					<label>Defense, <span data-format="bDollars">$20b</span></label>
+				</div>
+				<div class="item" data-variable="nondefense" data-format="barSection">
+					<div class="bar"></div>
+					<label>Non-defense, <span data-format="bDollars">$20b</span></label>
+				</div>
+				<div class="item" data-variable="interest" data-format="barSection">
+					<div class="bar"></div>
+					<label>Interest, <span data-format="bDollars">$20b</span></label>
+				</div>
+
 			</div>
 		</div>
 	</div>

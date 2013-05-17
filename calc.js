@@ -202,7 +202,7 @@ function render(){
 
 
 	// update zoom location markers
-	var zoomRatio = 3;
+	var zoomRatio = 13;
 	[0,1].forEach(function(i){
 		document.querySelectorAll(".zoomed .row")[i].addEventListener("scroll", function(e){
 			var left = e.target.scrollLeft;
