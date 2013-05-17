@@ -121,15 +121,24 @@ function findTarget(el){
 }
 
 // fixme: locked css class should be propagated by event, not here
-function addStay(variable, el){
-	if(variable.strongStay){
-		s.removeConstraint(variable.strongStay);
-		variable.strongStay = false;
-	} else {
-		variable.strongStay = new c.StayConstraint(variable, c.Strength.required, variable.value);
-		s.addConstraint(variable.strongStay);
+function removeStay(variable, el){
+	if(variable.stayConstraint){
+		s.removeConstraint(variable.stayConstraint);
+		variable.stayConstraint = false;
+		el.classList.remove("locked");
 	}
-	el.classList.toggle("locked");
+}
+
+function addStay(variable, el){
+	if(!variable.stayConstraint){
+		variable.stayConstraint = new c.StayConstraint(variable, c.Strength.required, variable.value);
+		s.addConstraint(variable.stayConstraint);
+		el.classList.add("locked");
+	}
+}
+
+function toggleStay(variable, el){
+	(variable.stayConstraint ? removeStay : addStay)(variable, el);
 }
 
 function attachControls(){
@@ -144,13 +153,13 @@ function attachControls(){
 		var variable = vars[varName];
 
 		if(!variable) return;
-		if(e.target.tagName === "LABEL") return addStay(variable, target)
+		if(e.target.tagName === "LABEL") return toggleStay(variable, target)
 
 		moving = variable;
 		movingView = target;
 		startX = e.screenX;
 		startVal = variable.value;
-		if(variable.strongStay) s.removeConstraint(variable.strongStay);
+		if(variable.stayConstraint) s.removeConstraint(variable.stayConstraint);
 		s.addEditVar(variable, c.Strength.high).beginEdit();
 	});
 
@@ -164,7 +173,10 @@ function attachControls(){
 		if(!moving) return;
 
 		s.endEdit();
-		if(moving.strongStay) s.addConstraint(moving.strongStay);
+		if(moving.stayConstraint){
+			moving.stayConstraint.expression.constant = moving.value;
+			s.addConstraint(moving.stayConstraint);
+		}
 		moving = null;
 	});
 }
@@ -202,7 +214,7 @@ function render(){
 
 
 	// update zoom location markers
-	var zoomRatio = 13;
+	var zoomRatio = 10;
 	[0,1].forEach(function(i){
 		document.querySelectorAll(".zoomed .row")[i].addEventListener("scroll", function(e){
 			var left = e.target.scrollLeft;

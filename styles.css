@@ -93,7 +93,7 @@ body {
 	position: absolute;
 	top: -2px;
 	left: 0px;
-	width: 200px;
+	width: 140px;
 	height:28px;
 	background: white;
 	z-index: 1;
@@ -126,6 +126,10 @@ body {
 	background: rgba(50,205,100,0.3);
 }
 
+.zoomed.revenues .item:nth-child(2n)   .bar { background: rgba(50,205,100,0.5);}
+.zoomed.revenues .item:nth-child(2n+1) .bar { background: rgba(50,205,100,0.3);}
+.zoomed.revenues .item.deficit .bar { background: rgba(205,50,100,0.3); }
+
 .rate1 .bar { background: rgba(50,205,100,0.95); }
 .rate2 .bar { background: rgba(50,205,100,0.8); }
 .rate3 .bar { background: rgba(50,205,100,0.65); }
@@ -147,13 +151,8 @@ body {
 	background: rgba(100,50,205,0.3);
 }
 
-.zoomed.spending .item:nth-child(7n)   .bar { background: rgba(100,50,205,0.4); }
-.zoomed.spending .item:nth-child(7n+1) .bar { background: rgba(100,50,205,0.5); }
-.zoomed.spending .item:nth-child(7n+2) .bar { background: rgba(100,50,205,0.4); }
-.zoomed.spending .item:nth-child(7n+3) .bar { background: rgba(100,50,205,0.5); }
-.zoomed.spending .item:nth-child(7n+4) .bar { background: rgba(100,50,205,0.4); }
-.zoomed.spending .item:nth-child(7n+5) .bar { background: rgba(100,50,205,0.5); }
-.zoomed.spending .item:nth-child(7n+6) .bar { background: rgba(100,50,205,0.4); }
+.zoomed.spending .item:nth-child(2n)   .bar { background: rgba(100,50,205,0.4); }
+.zoomed.spending .item:nth-child(2n+1) .bar { background: rgba(100,50,205,0.5); }
 
 
 /* Icon font */

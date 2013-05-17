@@ -31,10 +31,6 @@
 	<div class="zoomed revenues">
 		<div class="row">
 			<div class="row-inner">
-				<div class="item greyed" style="width:230px">
-					<div class="bar"></div>
-					<label>mething, $230b</label>
-				</div>
 
 				<div class="item personalTax">
 					<div class="item rate1" style="width:10px">
@@ -89,9 +85,23 @@
 					</label>
 				</div>
 
-				<div class="item greyed" style="width:2000px">
+				<div class="item" data-variable="corporateTax" data-format="barSection">
 					<div class="bar"></div>
-					<label>Something, $230b</label>
+					<label>Corporate taxes, <span data-format="bDollars">$20b</span></label>
+				</div>
+				<div class="item" data-variable="socialTax" data-format="barSection">
+					<div class="bar"></div>
+					<label>Social taxes, <span data-format="bDollars">$20b</span></label>
+				</div>
+				<div class="item" data-variable="otherTax" data-format="barSection">
+					<div class="bar"></div>
+					<label>Other taxes, <span data-format="bDollars">$20b</span></label>
+				</div>
+
+
+				<div class="item deficit" data-variable="deficit" data-format="barSection">
+					<div class="bar"></div>
+					<label>Deficit, <span data-format="bDollars"></span></label>
 				</div>
 			</div>
 		</div>
@@ -101,17 +111,6 @@
 	<div class="zoomed spending">
 		<div class="row">
 			<div class="row-inner">
-
-<!--
-				var socialsecurity = vars.socialsecurity = new c.Variable({ name: "socialsecurity", value: 725 });
-var medicaid = vars.medicaid = new c.Variable({ name: "medicaid", value: 275 });
-var medicare = vars.medicare = new c.Variable({ name: "medicare", value: 480 });
-var mandatoryother = vars.mandatoryother = new c.Variable({ name: "mandatoryother", value: 545 });
-var defense = vars.defense = new c.Variable({ name: "defense", value: 700 });
-var nondefense = vars.nondefense = new c.Variable({ name: "nondefense", value: 646 });
-var interest = vars.interest = new c.Variable({ name: "interest", value: 227 });
--->
-
 
 				<div class="item" data-variable="socialsecurity" data-format="barSection">
 					<div class="bar"></div>
