@@ -215,13 +215,22 @@ function render(){
 
 
 	// update zoom location markers
-	var zoomRatio = 10;
-	[0,1].forEach(function(i){
-		document.querySelectorAll(".zoomed .row")[i].addEventListener("scroll", function(e){
-			var left = e.target.scrollLeft;
-			document.querySelectorAll(".overview .shown")[i].style.left = left/zoomRatio+"px";
+	var zoomedViews = [].slice.call(document.querySelectorAll(".zoomed .row"));
+	var overviewZoomedViews = [].slice.call(document.querySelectorAll(".overview .shown"));
+
+	if(zoomedViews.length !== 2){
+		overviewZoomedViews.forEach(function(node){
+			node.parentNode.removeChild(node);
 		});
-	});
+	} else {
+		var zoomRatio = 10;
+		[0,1].forEach(function(i){
+			zoomedViews[i].addEventListener("scroll", function(e){
+				var left = e.target.scrollLeft;
+				overviewZoomedViews[i].style.left = left/zoomRatio+"px";
+			});
+		});
+	}
 
 }
 
