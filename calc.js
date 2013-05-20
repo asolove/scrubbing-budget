@@ -10,7 +10,7 @@ var deficit = vars.deficit = new c.Variable({ name: "deficit" });
 
 var taxRates = [10, 15, 25, 28, 33, 35, 39.6];
 // FIXME: real numbers
-var dollarsInBracket = [1, 2, 3, 4, 5, 6, 13];
+var dollarsInBracket = [0.1, 0.2, 0.5, 2, 3, 5, 20];
 
 taxRates.forEach(function(rate, i){
 	vars["tax-bracket-"+i] = new c.Variable({ name: "tax-bracket-"+i, value: rate });

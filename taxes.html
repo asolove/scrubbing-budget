@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+<title>The US Federal Budget</title>
+<link href="styles.css" rel="stylesheet"></link>
+</head>
+<body>
+<div id="wrap">
+
+  <div class="overview">
+    <div class="row">
+      <div class="shown"></div>
+      <div class="revenues item" data-variable="revenues" data-format="barSection" data-scale="overview">
+        <div class="bar"></div>
+        <label>Revenues <span data-format="bDollars">$2,300b</span></label>
+      </div>
+      <div class="deficit item" data-variable="deficit" data-format="barSection" data-scale="overview">
+        <div class="bar"></div>
+        <label>Deficit <span data-format="bDollars">$1,300b</span></label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="shown"></div>
+      <div class="spending item" data-variable="spending" data-format="barSection" data-scale="overview">
+        <div class="bar"></div>
+        <label>Spending <span data-format="bDollars">$3,600b</span></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <div class="zoomed revenues">
+    <div class="row">
+      <div class="row-inner">
+
+        <div class="item personalTax">
+          <div class="item" data-variable="tax-bracket-0-revenue" data-format="barSection">
+            <div class="bar"></div>
+          </div>
+
+          <div class="item" data-variable="tax-bracket-1-revenue" data-format="barSection">
+            <div class="bar"></div>
+          </div>
+          <div class="item" data-variable="tax-bracket-2-revenue" data-format="barSection">
+            <div class="bar"></div>
+          </div>
+          <div class="item" data-variable="tax-bracket-3-revenue" data-format="barSection">
+            <div class="bar"></div>
+          </div>
+          <div class="item" data-variable="tax-bracket-4-revenue" data-format="barSection">
+            <div class="bar"></div>
+          </div>
+          <div class="item" data-variable="tax-bracket-5-revenue" data-format="barSection">
+            <div class="bar"></div>
+          </div>
+          <div class="item" data-variable="tax-bracket-6-revenue" data-format="barSection">
+            <div class="bar"></div>
+          </div>
+          <label>
+            <div class="tax-rates">
+
+              Personal income tax rates
+              <dl>
+                <dt data-variable="tax-bracket-0" data-format="percent">10%</dt>
+                <dd data-variable="tax-bracket-0" data-format="taxRate" data-scale="taxRate"><div class="bar"></div></dd>
+
+                <dt data-variable="tax-bracket-1" data-format="percent">15%</dt>
+                <dd data-variable="tax-bracket-1" data-format="taxRate" data-scale="taxRate"><div class="bar"></div></dd>
+
+                <dt data-variable="tax-bracket-2" data-format="percent">25%</dt>
+                <dd data-variable="tax-bracket-2" data-format="taxRate" data-scale="taxRate"><div class="bar"></div></dd>
+
+                <dt data-variable="tax-bracket-3" data-format="percent">28%</dt>
+                <dd data-variable="tax-bracket-3" data-format="taxRate" data-scale="taxRate"><div class="bar"></div></dd>
+
+                <dt data-variable="tax-bracket-4" data-format="percent">33%</dt>
+                <dd data-variable="tax-bracket-4" data-format="taxRate" data-scale="taxRate"><div class="bar"></div></dd>
+
+                <dt data-variable="tax-bracket-5" data-format="percent">35%</dt>
+                <dd data-variable="tax-bracket-5" data-format="taxRate" data-scale="taxRate"><div class="bar"></div></dd>
+
+                <dt data-variable="tax-bracket-6" data-format="percent">40%</dt>
+                <dd data-variable="tax-bracket-6" data-format="taxRate" data-scale="taxRate"><div class="bar"></div></dd>
+              </dl>
+            </div>
+          </label>
+        </div>
+
+        <div class="item" data-variable="corporateTax" data-format="barSection">
+          <div class="bar"></div>
+          <label>Corporate taxes, <span data-format="bDollars">$20b</span></label>
+        </div>
+        <div class="item" data-variable="socialTax" data-format="barSection">
+          <div class="bar"></div>
+          <label>Social taxes, <span data-format="bDollars">$20b</span></label>
+        </div>
+        <div class="item" data-variable="otherTax" data-format="barSection">
+          <div class="bar"></div>
+          <label>Other taxes, <span data-format="bDollars">$20b</span></label>
+        </div>
+
+
+        <div class="item deficit" data-variable="deficit" data-format="barSection">
+          <div class="bar"></div>
+          <label>Deficit, <span data-format="bDollars"></span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="lib/c.js"></script>
+<script src="lib/underscore.js"></script>
+<script src="calc.js"></script>
+
+</body>
+</html>
