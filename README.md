@@ -1,7 +1,12 @@
 Scrubbing Budget
 ================
 
-An interactive exploration of the US Federal Budget based on linear constraint programming in Cassowary.
+An interactive exploration of the US Federal Budget based on linear constraint programming in Cassowary. Built for my JSConf 2013 talk: [Constraint programming in the browser](http://adamsolove.com/js/2013/10/15/constraint-programming-in-the-browser.html)
+
+![Screenshot](screenshot.png)
+
+Credits
+-------
 
 None of this is creditable to me. Instead, go see:
 
